@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">ThrowableApp</string>
+    <string name="main_text">Demonstration how to work with library</string>
+    <string name="check_button">Check Throwable</string>
+    <string name="uncheck_button">Uncheck Throwable</string>
 </resources>
