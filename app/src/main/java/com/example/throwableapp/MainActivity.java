@@ -7,6 +7,8 @@ import android.widget.Button;
 
 import com.example.throwablelibrary.ThrowableCheck;
 
+import java.util.EmptyStackException;
+
 public class MainActivity extends AppCompatActivity {
 
     @Override
@@ -31,11 +33,16 @@ public class MainActivity extends AppCompatActivity {
             throw new Throwable();
         } catch (Throwable throwable) {
             ThrowableCheck.writeToLog(throwable);
-            ThrowableCheck.writeToFile(this,throwable);
+            ThrowableCheck thr = new ThrowableCheck();
+            thr.writeFileOnInternalStorage(this,throwable);
         }
     }
 
-    private void uncheckThrowableLog() {
-
+    private void uncheckThrowableLog()  {
+        EmptyStackException throwable = new EmptyStackException();
+        ThrowableCheck.writeToLog(throwable);
+        ThrowableCheck thr = new ThrowableCheck();
+        thr.writeFileOnInternalStorage(this,throwable);
+        throw throwable;
     }
 }
