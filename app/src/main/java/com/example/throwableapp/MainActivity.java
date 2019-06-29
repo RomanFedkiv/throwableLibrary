@@ -33,16 +33,14 @@ public class MainActivity extends AppCompatActivity {
             throw new Throwable();
         } catch (Throwable throwable) {
             ThrowableCheck.writeToLog(throwable);
-            ThrowableCheck thr = new ThrowableCheck();
-            thr.writeFileOnInternalStorage(this,throwable);
+            ThrowableCheck.writeFileOnInternalStorage(this,throwable);
         }
     }
 
     private void uncheckThrowableLog()  {
         EmptyStackException throwable = new EmptyStackException();
         ThrowableCheck.writeToLog(throwable);
-        ThrowableCheck thr = new ThrowableCheck();
-        thr.writeFileOnInternalStorage(this,throwable);
+        ThrowableCheck.writeFileOnInternalStorage(this,throwable);
         throw throwable;
     }
 }
