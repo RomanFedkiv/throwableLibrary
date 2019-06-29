@@ -5,6 +5,7 @@ import android.util.Log;
 
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
 
 public class ThrowableCheck {
@@ -16,28 +17,24 @@ public class ThrowableCheck {
         Log.d(TAG, throwable.toString());
     }
 
-    public static void writeToFile(Context context, Throwable throwable) {
+    public void writeFileOnInternalStorage(Context mcoContext, Throwable throwable){
+
         String throwableInfo = throwable.toString();
 
-        FileOutputStream outputStream = null;
-
-        File file;
-
-        try {
-            outputStream = new FileOutputStream(FILE_NAME);
-            file = File.createTempFile(FILE_NAME, null, context.getCacheDir());
-
-            outputStream.write(throwableInfo.getBytes());
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                outputStream.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+        File file = new File(mcoContext.getFilesDir(),"mydir");
+        if(!file.exists()){
+            file.mkdir();
         }
+        try{
+            File gpxfile = new File(file, FILE_NAME);
+            FileWriter writer = new FileWriter(gpxfile);
+            writer.append(throwableInfo);
+            writer.flush();
+            writer.close();
 
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
 }

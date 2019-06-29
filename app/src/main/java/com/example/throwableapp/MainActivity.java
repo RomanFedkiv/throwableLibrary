@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.example.throwablelibrary.ThrowableCheck;
+
 public class MainActivity extends AppCompatActivity {
 
     @Override
@@ -25,7 +27,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void checkThrowableLog() {
-
+        try {
+            throw new Throwable();
+        } catch (Throwable throwable) {
+            ThrowableCheck.writeToLog(throwable);
+            ThrowableCheck.writeToFile(this,throwable);
+        }
     }
 
     private void uncheckThrowableLog() {
